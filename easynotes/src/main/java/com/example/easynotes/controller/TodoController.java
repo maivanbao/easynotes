@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.easynotes.Exception.ResourceNotFoundException;
 import com.example.easynotes.model.Todo;
 import com.example.easynotes.repository.TodoRepository;
 
@@ -40,8 +41,8 @@ public class TodoController {
 	@GetMapping("/todos/{todoId}")
 	public ResponseEntity<Todo> getTodoById(@PathVariable(value = "todoId") Long todoId) {
 		return todoRepository.findById(todoId).map(todo -> {
-			return ResponseEntity.ok().body(todo);
-		}).orElse(ResponseEntity.notFound().build());
+			return ResponseEntity.ok(todo);
+		}).orElseThrow(()-> new ResourceNotFoundException("Not Found"));
 	}
 
 	@PutMapping("/todos/{todoId}")
@@ -59,7 +60,7 @@ public class TodoController {
 		return todoRepository.findById(id).map(todo -> {
 			todoRepository.deleteById(id);
 			return ResponseEntity.ok().build();
-		}).orElse(ResponseEntity.notFound().build());
+		}).orElseThrow(()-> new ResourceNotFoundException("Not Found"));
 	}
 
 }
