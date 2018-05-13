@@ -13,6 +13,11 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="posts")
 public class Post extends AuditModel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1822193280454527628L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;

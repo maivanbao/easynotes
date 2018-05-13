@@ -16,6 +16,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "comments")
 public class Comment extends AuditModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2130534135956638766L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

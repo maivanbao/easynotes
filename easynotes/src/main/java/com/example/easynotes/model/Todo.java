@@ -5,14 +5,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 @Entity
-@Table(name="todos")
+@Table(name = "todos")
 public class Todo extends AuditModel {
+	
+	private static final long serialVersionUID = 102098336399575188L;
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	
 	private String title;
 
 	private Boolean completed;
@@ -91,7 +94,7 @@ public class Todo extends AuditModel {
 
 	@Override
 	public String toString() {
-		return "Todo [id=" + id + ", title=" + title + ", completed=" + completed + "]";
+		return "Todo [id=" + id + ", title=" + title + ", completed=" + completed + ", create_at=" + this.getCreatedAt() + ", update_at=" + this.getUpdatedAt() + "]";
 	}
 
 }

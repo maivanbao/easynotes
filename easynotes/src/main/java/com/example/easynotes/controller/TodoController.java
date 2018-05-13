@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,7 +24,7 @@ import com.example.easynotes.repository.TodoRepository;
 @RestController
 @CrossOrigin("*")
 public class TodoController {
-
+	private static final Logger logger = LogManager.getLogger(TodoController.class);
 	@Autowired
 	private TodoRepository todoRepository;
 
@@ -33,8 +35,16 @@ public class TodoController {
 
 	@PostMapping("/todos")
 	public Todo createTodo(@Valid @RequestBody Todo todo) {
-		todo.setCompleted(false);
-		return todoRepository.save(todo);
+		try {
+			todo.setCompleted(false);
+			Todo createTodo = todoRepository.save(todo);
+			logger.info(createTodo.toString());
+			return createTodo;
+		} catch (Exception ex) {
+			logger.info(ex.getMessage());
+			ex.printStackTrace();
+			throw new ResourceNotFoundException("Exception");
+		}
 
 	}
 
@@ -42,7 +52,7 @@ public class TodoController {
 	public ResponseEntity<Todo> getTodoById(@PathVariable(value = "todoId") Long todoId) {
 		return todoRepository.findById(todoId).map(todo -> {
 			return ResponseEntity.ok(todo);
-		}).orElseThrow(()-> new ResourceNotFoundException("Not Found"));
+		}).orElseThrow(() -> new ResourceNotFoundException("Not Found"));
 	}
 
 	@PutMapping("/todos/{todoId}")
@@ -60,7 +70,7 @@ public class TodoController {
 		return todoRepository.findById(id).map(todo -> {
 			todoRepository.deleteById(id);
 			return ResponseEntity.ok().build();
-		}).orElseThrow(()-> new ResourceNotFoundException("Not Found"));
+		}).orElseThrow(() -> new ResourceNotFoundException("Not Found"));
 	}
 
 }
