@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import com.example.easynotes.Utils.HibernateUtil;
+import com.example.easynotes.Utils.HibernateUtils;
 import com.example.easynotes.controller.PostController;
 import com.example.easynotes.model.Todo;
 
@@ -16,7 +16,7 @@ public class ThreanMain {
 	private static final Logger logger = LogManager.getLogger(PostController.class);
 	public static void main(String[] args) {
 
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSessionFactory().openSession();
 		session.beginTransaction();
 
 //		Todo clazz = new Todo();
