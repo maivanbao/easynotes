@@ -14,9 +14,5 @@
 		<property name="hibernate.show_sql">true</property>
 		<property name="format_sql">true</property>
 		<mapping class="com.example.easynotes.model.Todo" />
-		<mapping class="com.example.easynotes.model.Department" />
-		<mapping class="com.example.easynotes.model.Employee" />
-		<mapping class="com.example.easynotes.model.SalaryGrade" />
-		<mapping class="com.example.easynotes.model.Timekeeper" />
 	</session-factory>
 </hibernate-configuration>
