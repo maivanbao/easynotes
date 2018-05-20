@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterModule, Routes, RouterLink } from '@angular/router';
 import * as constants from './constants';
 @Component({
   selector: 'app-root',
@@ -6,5 +7,6 @@ import * as constants from './constants';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = constants.API_BASE_URL;
+  title = 'Tour of Heroes';
+  // constructor(public routerLink:RouterLink){}
 }
